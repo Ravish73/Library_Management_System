@@ -176,3 +176,44 @@ body {
   color: white;
   font-weight: bold;
 }
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.edit-form input {
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.edit-form input:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+
+.edit-form button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.edit-form button:hover {
+  background: #1d4ed8;
+}
+.edit-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
+}

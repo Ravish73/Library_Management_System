@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-
+import { useNavigate } from "react-router-dom";
 function BookList() {
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadBooks();
@@ -18,16 +19,6 @@ function BookList() {
     }
   };
 
-  const deleteBook = async (id) => {
-    try {
-      await api.delete(`/${id}`);
-
-      setBooks(books.filter((book) => book.id !== id));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const filteredBooks = books.filter(
     (book) =>
       book.title?.toLowerCase().includes(search.toLowerCase()) ||
@@ -35,7 +26,23 @@ function BookList() {
       book.genre?.toLowerCase().includes(search.toLowerCase()) ||
       book.year?.toString().includes(search),
   );
+  const editBook = (id) => {
+    console.log("Edit clicked:", id);
+    navigate(`/edit-book/${id}`);
+  };
 
+  const deleteBook = async (id) => {
+    try {
+      await api.delete(`/${id}`);
+
+      alert("Book deleted successfully ✅");
+
+      loadBooks();
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete book ❌");
+    }
+  };
   return (
     <div className="container">
       <h1>Book Management System</h1>
@@ -70,7 +77,7 @@ function BookList() {
             </p>
 
             <div className="btn-group">
-              <button className="edit-btn" onClick={() => updateBook(book.id)}>
+              <button className="edit-btn" onClick={() => editBook(book.id)}>
                 Edit
               </button>
 
